@@ -1,10 +1,13 @@
 - hosts: server
   vars:
-    image: ajizkai/docker-ansible:beta
+    image: agung114/docker-ansible:beta
   tasks:
     - name: install python-docker ubuntu
+      loop:
+      - python
+      - python-docker
       apt:
-        name: python-docker
+        name: "{{ item }}"
         state: present
       when: 
       - ansible_distribution == "Ubuntu"
